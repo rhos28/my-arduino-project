@@ -1,0 +1,27 @@
+name: Compile Arduino Project
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Compile Arduino Sketch
+      uses: arduino/compile-sketches@v1
+      with:
+        sketch-paths: |
+          *.ino
+        platforms: |
+          arduino:avr
+          esp32:esp32
+        libraries: |
+          ArduinoJson
+          WiFi
